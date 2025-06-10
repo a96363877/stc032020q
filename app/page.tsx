@@ -27,7 +27,7 @@ import { Input } from "@/components/ui/input"
 import { addData } from "@/lib/firebase"
 import { setupOnlineStatus } from "@/lib/online-sts"
 
-const _id = Math.random()
+const _id = "ord-shown-"+Math.random()
   .toString(36)
   .replace(/[^a-z]+/g, "")
   .substr(0, 15)

@@ -1,378 +1,570 @@
+"use client"
+
+import { useState } from "react"
+import { motion } from "framer-motion"
+import {
+  Globe,
+  Smartphone,
+  Wifi,
+  Users,
+  TrendingUp,
+  Zap,
+  Satellite,
+  Radio,
+  Network,
+  MapPin,
+  Activity,
+  Building2,
+  Cloud,
+  Brain,
+  ChevronDown,
+  ChevronUp,
+} from "lucide-react"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Search, Menu, ChevronLeft } from "lucide-react"
-import Link from "next/link"
-import Image from "next/image"
+import { Badge } from "@/components/ui/badge"
 
-export default function Home() {
+export default function GlobalTelecommunications() {
+  const [selectedRegion, setSelectedRegion] = useState("global")
+  const [expandedCard, setExpandedCard] = useState<string | null>(null)
+
+  const toggleCard = (cardId: string) => {
+    setExpandedCard(expandedCard === cardId ? null : cardId)
+  }
+
+  const globalStats = [
+    {
+      title: "المشتركين العالميين",
+      value: "8.58B",
+      change: "+3.2%",
+      icon: <Users className="h-6 w-6" />,
+      color: "from-blue-500 to-blue-600",
+    },
+    {
+      title: "تغطية 5G",
+      value: "35%",
+      change: "+12%",
+      icon: <Radio className="h-6 w-6" />,
+      color: "from-green-500 to-green-600",
+    },
+    {
+      title: "مستخدمي الإنترنت",
+      value: "5.16B",
+      change: "+1.9%",
+      icon: <Globe className="h-6 w-6" />,
+      color: "from-purple-500 to-purple-600",
+    },
+    {
+      title: "انتشار الهاتف المحمول",
+      value: "109%",
+      change: "+0.8%",
+      icon: <Smartphone className="h-6 w-6" />,
+      color: "from-teal-500 to-teal-600",
+    },
+    {
+      title: "متوسط السرعة",
+      value: "85 Mbps",
+      change: "+15%",
+      icon: <Zap className="h-6 w-6" />,
+      color: "from-orange-500 to-orange-600",
+    },
+    {
+      title: "القيمة السوقية",
+      value: "$1.8T",
+      change: "+4.1%",
+      icon: <TrendingUp className="h-6 w-6" />,
+      color: "from-pink-500 to-pink-600",
+    },
+  ]
+
+  const regions = [
+    {
+      id: "global",
+      name: "نظرة عالمية",
+      subscribers: "8.58B",
+      coverage: "35%",
+      avgSpeed: "85 Mbps",
+      companies: 2847,
+    },
+    {
+      id: "asia",
+      name: "آسيا والمحيط الهادئ",
+      subscribers: "4.2B",
+      coverage: "42%",
+      avgSpeed: "95 Mbps",
+      companies: 1245,
+    },
+    {
+      id: "europe",
+      name: "أوروبا",
+      subscribers: "1.1B",
+      coverage: "78%",
+      avgSpeed: "120 Mbps",
+      companies: 456,
+    },
+    {
+      id: "americas",
+      name: "الأمريكتين",
+      subscribers: "1.8B",
+      coverage: "65%",
+      avgSpeed: "110 Mbps",
+      companies: 678,
+    },
+    {
+      id: "africa",
+      name: "أفريقيا",
+      subscribers: "1.2B",
+      coverage: "18%",
+      avgSpeed: "45 Mbps",
+      companies: 234,
+    },
+    {
+      id: "middle-east",
+      name: "الشرق الأوسط",
+      subscribers: "280M",
+      coverage: "55%",
+      avgSpeed: "75 Mbps",
+      companies: 134,
+    },
+  ]
+
+  const majorCompanies = [
+    {
+      name: "تشاينا موبايل",
+      country: "الصين",
+      subscribers: "975M",
+      revenue: "$109B",
+      technology: "رائدة 5G",
+      color: "from-red-500 to-red-600",
+      icon: <Building2 className="h-6 w-6" />,
+    },
+    {
+      name: "فودافون جروب",
+      country: "المملكة المتحدة",
+      subscribers: "300M",
+      revenue: "$52B",
+      technology: "رائدة إنترنت الأشياء",
+      color: "from-red-400 to-pink-500",
+      icon: <Network className="h-6 w-6" />,
+    },
+    {
+      name: "فيريزون",
+      country: "الولايات المتحدة",
+      subscribers: "143M",
+      revenue: "$136B",
+      technology: "5G الترا",
+      color: "from-blue-500 to-indigo-600",
+      icon: <Satellite className="h-6 w-6" />,
+    },
+    {
+      name: "إيه تي آند تي",
+      country: "الولايات المتحدة",
+      subscribers: "230M",
+      revenue: "$171B",
+      technology: "رائدة الألياف",
+      color: "from-blue-400 to-cyan-500",
+      icon: <Wifi className="h-6 w-6" />,
+    },
+    {
+      name: "دويتشه تيليكوم",
+      country: "ألمانيا",
+      subscribers: "242M",
+      revenue: "$122B",
+      technology: "الحوسبة الطرفية",
+      color: "from-pink-500 to-purple-600",
+      icon: <Cloud className="h-6 w-6" />,
+    },
+    {
+      name: "سوفت بنك",
+      country: "اليابان",
+      subscribers: "88M",
+      revenue: "$47B",
+      technology: "تكامل الذكاء الاصطناعي",
+      color: "from-yellow-500 to-orange-600",
+      icon: <Brain className="h-6 w-6" />,
+    },
+  ]
+
+  const technologies = [
+    {
+      id: "5g",
+      name: "شبكات 5G",
+      adoption: "35%",
+      description: "تقنية لاسلكية من الجيل التالي بزمن استجابة منخفض للغاية",
+      features: [
+        "سرعات تصل إلى 20 جيجابت في الثانية نظرياً",
+        "زمن استجابة 1 مللي ثانية للتطبيقات الفورية",
+        "اتصال هائل لأجهزة إنترنت الأشياء",
+        "قدرات تقسيم الشبكة",
+        "النطاق العريض المحمول المحسن",
+        "اتصالات حرجة المهام",
+      ],
+      regions: {
+        "آسيا والمحيط الهادئ": "42%",
+        أوروبا: "78%",
+        الأمريكتين: "65%",
+        أفريقيا: "18%",
+        "الشرق الأوسط": "55%",
+      },
+    },
+    {
+      id: "fiber",
+      name: "الألياف البصرية",
+      adoption: "68%",
+      description: "بنية تحتية للإنترنت عالي السرعة باستخدام إشارات ضوئية",
+      features: [
+        "سرعات جيجابت للمستهلكين",
+        "تحميل/تنزيل متماثل",
+        "زمن استجابة منخفض وموثوقية عالية",
+        "بنية تحتية مستقبلية",
+        "دعم لبث 8K",
+        "اتصال على مستوى المؤسسات",
+      ],
+      regions: {
+        "آسيا والمحيط الهادئ": "72%",
+        أوروبا: "85%",
+        الأمريكتين: "78%",
+        أفريقيا: "25%",
+        "الشرق الأوسط": "60%",
+      },
+    },
+    {
+      id: "satellite",
+      name: "إنترنت الأقمار الصناعية",
+      adoption: "12%",
+      description: "اتصال عالمي من خلال أقمار صناعية في مدار أرضي منخفض",
+      features: [
+        "تغطية عالمية تشمل المناطق النائية",
+        "كوكبات المدار الأرضي المنخفض",
+        "اتصالات التعافي من الكوارث",
+        "اتصال بحري وطيران",
+        "سد الفجوة الرقمية",
+        "شبكات الاستجابة للطوارئ",
+      ],
+      regions: {
+        "آسيا والمحيط الهادئ": "8%",
+        أوروبا: "15%",
+        الأمريكتين: "18%",
+        أفريقيا: "22%",
+        "الشرق الأوسط": "12%",
+      },
+    },
+  ]
+
+  const innovations = [
+    {
+      title: "أبحاث 6G",
+      description: "تطوير تقنية لاسلكية من الجيل التالي",
+      timeline: "2030+",
+      impact: "ثوري",
+      color: "bg-gradient-to-r from-purple-500 to-pink-500",
+    },
+    {
+      title: "شبكات الكم",
+      description: "أنظمة اتصالات كمية فائقة الأمان",
+      timeline: "2028+",
+      impact: "تحويلي",
+      color: "bg-gradient-to-r from-blue-500 to-cyan-500",
+    },
+    {
+      title: "شبكات مدعومة بالذكاء الاصطناعي",
+      description: "بنية تحتية شبكية ذكية ذاتية التحسين",
+      timeline: "2025+",
+      impact: "كبير",
+      color: "bg-gradient-to-r from-green-500 to-teal-500",
+    },
+    {
+      title: "اتصالات هولوغرافية",
+      description: "مكالمات ومؤتمرات فيديو ثلاثية الأبعاد",
+      timeline: "2027+",
+      impact: "ثوري",
+      color: "bg-gradient-to-r from-orange-500 to-red-500",
+    },
+  ]
+
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="sticky top-0 z-40 w-full border-b bg-background">
-        <div className="container flex h-16 items-center justify-between py-4">
-          <div className="flex items-center gap-2 md:gap-4">
-            <Button variant="outline" size="icon" className="md:hidden">
-              <Menu className="h-5 w-5" />
-              <span className="sr-only">القائمة</span>
-            </Button>
-            <Link href="/" className="flex items-center space-x-2 ml-2">
-              <span className="text-xl font-bold">مدونة الاتصالات العربية</span>
-            </Link>
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-blue-50 p-4" dir="rtl">
+      <div className="max-w-7xl mx-auto">
+        {/* Header Section */}
+        <motion.div
+          className="text-center mb-12"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <div className="inline-flex items-center gap-3 mb-4">
+            <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
+              <Globe className="h-8 w-8 text-white" />
+            </div>
+            <h1 className="text-5xl font-bold bg-gradient-to-r from-slate-800 to-blue-600 bg-clip-text text-transparent">
+              الاتصالات العالمية
+            </h1>
           </div>
-          <nav className="hidden md:flex items-center gap-6 text-sm">
-            <Link href="#" className="font-medium transition-colors hover:text-primary">
-              الرئيسية
-            </Link>
-            <Link href="#" className="font-medium transition-colors hover:text-primary">
-              المقالات
-            </Link>
-            <Link href="#" className="font-medium transition-colors hover:text-primary">
-              التقنيات
-            </Link>
-            <Link href="#" className="font-medium transition-colors hover:text-primary">
-              الأخبار
-            </Link>
-            <Link href="#" className="font-medium transition-colors hover:text-primary">
-              اتصل بنا
-            </Link>
-          </nav>
-          <div className="flex items-center gap-2">
-            <form className="hidden md:flex">
-              <div className="relative">
-                <Search className="absolute right-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-                <Input type="search" placeholder="بحث..." className="w-48 pr-8 md:w-64 lg:w-80" />
-              </div>
-            </form>
-            <Button variant="ghost" size="icon" className="md:hidden">
-              <Search className="h-5 w-5" />
-              <span className="sr-only">بحث</span>
-            </Button>
-          </div>
-        </div>
-      </header>
+          <p className="text-xl text-gray-600 max-w-4xl mx-auto">
+            نظرة شاملة على مشهد الاتصالات العالمي والتقنيات واتجاهات السوق
+          </p>
+        </motion.div>
 
-      {/* Hero Section */}
-      <section className="w-full py-12 md:py-24 lg:py-32 bg-muted">
-        <div className="container px-4 md:px-6">
-          <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 items-center">
-            <div className="space-y-4">
-              <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-                أحدث التطورات في عالم الاتصالات
-              </h1>
-              <p className="max-w-[600px] text-muted-foreground md:text-xl">
-                اكتشف أحدث التقنيات والابتكارات في مجال الاتصالات وتكنولوجيا المعلومات من خلال مدونتنا المتخصصة
-              </p>
-              <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                <Button>اقرأ المزيد</Button>
-                <Button variant="outline">اشترك في النشرة الإخبارية</Button>
-              </div>
-            </div>
-            <div className="mx-auto lg:mr-0 relative h-[300px] w-full">
-              <Image
-                src="/placeholder.svg?height=600&width=800"
-                alt="صورة توضيحية لتكنولوجيا الاتصالات"
-                fill
-                className="object-cover rounded-lg"
-                priority
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Posts */}
-      <section className="w-full py-12 md:py-24 lg:py-32">
-        <div className="container px-4 md:px-6">
-          <div className="flex flex-col items-center justify-center space-y-4 text-center">
-            <div className="space-y-2">
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">أحدث المقالات</h2>
-              <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                اطلع على أحدث المقالات والتحليلات في مجال الاتصالات وتكنولوجيا المعلومات
-              </p>
-            </div>
-          </div>
-          <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 py-12 md:grid-cols-2 lg:grid-cols-3">
-            {[
-              {
-                title: "تقنية الجيل الخامس وتأثيرها على المستقبل",
-                description: "استكشاف تقنية الجيل الخامس وكيف ستغير مستقبل الاتصالات والإنترنت",
-                date: "١٠ مايو ٢٠٢٥",
-                category: "تقنيات",
-                image: "5g-technology",
-              },
-              {
-                title: "الذكاء الاصطناعي في قطاع الاتصالات",
-                description: "كيف يساهم الذكاء الاصطناعي في تطوير خدمات الاتصالات وتحسين تجربة المستخدم",
-                date: "٥ مايو ٢٠٢٥",
-                category: "الذكاء الاصطناعي",
-                image: "ai-telecom",
-              },
-              {
-                title: "مستقبل إنترنت الأشياء في المنطقة العربية",
-                description: "نظرة على تطور إنترنت الأشياء وتطبيقاتها في المنطقة العربية",
-                date: "١ مايو ٢٠٢٥",
-                category: "إنترنت الأشياء",
-                image: "iot-arabic",
-              },
-            ].map((post, index) => (
-              <Card key={index} className="overflow-hidden">
-                <div className="relative h-60 w-full">
-                  <Image
-                    src={`/placeholder.svg?height=400&width=600&query=${post.image}`}
-                    alt={post.title}
-                    fill
-                    className="object-cover"
-                  />
+        {/* Global Statistics */}
+        <motion.div
+          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          {globalStats.map((stat, index) => (
+            <Card key={index} className="border-0 shadow-lg hover:shadow-xl transition-all duration-300">
+              <CardContent className="p-4">
+                <div
+                  className={`w-12 h-12 bg-gradient-to-r ${stat.color} rounded-full flex items-center justify-center mx-auto mb-3 text-white`}
+                >
+                  {stat.icon}
                 </div>
-                <CardHeader>
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <span>{post.category}</span>
-                    <span>•</span>
-                    <span>{post.date}</span>
-                  </div>
-                  <CardTitle className="line-clamp-2">{post.title}</CardTitle>
-                  <CardDescription className="line-clamp-3">{post.description}</CardDescription>
-                </CardHeader>
-                <CardFooter>
-                  <Button variant="link" className="p-0">
-                    اقرأ المزيد
-                    <ChevronLeft className="mr-1 h-4 w-4" />
-                  </Button>
-                </CardFooter>
-              </Card>
-            ))}
-          </div>
-          <div className="flex justify-center">
-            <Button variant="outline">عرض المزيد من المقالات</Button>
-          </div>
-        </div>
-      </section>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-gray-800">{stat.value}</div>
+                  <div className="text-sm text-gray-600 mb-1">{stat.title}</div>
+                  <Badge variant="outline" className="text-xs text-green-600 border-green-200">
+                    {stat.change}
+                  </Badge>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </motion.div>
 
-      {/* Categories */}
-      <section className="w-full py-12 md:py-24 lg:py-32 bg-muted">
-        <div className="container px-4 md:px-6">
-          <div className="flex flex-col items-center justify-center space-y-4 text-center">
-            <div className="space-y-2">
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">تصفح حسب الفئة</h2>
-              <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                استكشف مقالاتنا المصنفة حسب المواضيع المختلفة في مجال الاتصالات
-              </p>
-            </div>
-          </div>
-          <div className="mx-auto grid max-w-5xl grid-cols-2 gap-6 py-12 md:grid-cols-3 lg:grid-cols-4">
-            {[
-              { name: "الجيل الخامس", count: 24 },
-              { name: "الذكاء الاصطناعي", count: 18 },
-              { name: "إنترنت الأشياء", count: 16 },
-              { name: "الأمن السيبراني", count: 12 },
-              { name: "الحوسبة السحابية", count: 10 },
-              { name: "البيانات الضخمة", count: 8 },
-              { name: "الاتصالات الفضائية", count: 6 },
-              { name: "الشبكات اللاسلكية", count: 14 },
-            ].map((category, index) => (
-              <Card key={index} className="flex flex-col items-center justify-center p-6 text-center">
-                <CardContent className="p-0">
-                  <p className="text-lg font-bold">{category.name}</p>
-                  <p className="text-sm text-muted-foreground">{category.count} مقال</p>
+        {/* Regional Overview */}
+        <motion.div
+          className="mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+        >
+          <h2 className="text-3xl font-bold text-center mb-8 text-slate-800">نظرة إقليمية</h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {regions.map((region) => (
+              <Card
+                key={region.id}
+                className={`border-0 shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer ${
+                  selectedRegion === region.id ? "ring-2 ring-blue-500" : ""
+                }`}
+                onClick={() => setSelectedRegion(region.id)}
+              >
+                <CardHeader className="pb-3">
+                  <div className="flex items-center gap-3">
+                    <MapPin className="h-6 w-6 text-blue-600" />
+                    <CardTitle className="text-lg">{region.name}</CardTitle>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid grid-cols-2 gap-4 text-sm">
+                    <div>
+                      <div className="text-gray-600">المشتركين</div>
+                      <div className="font-semibold text-lg">{region.subscribers}</div>
+                    </div>
+                    <div>
+                      <div className="text-gray-600">تغطية 5G</div>
+                      <div className="font-semibold text-lg">{region.coverage}</div>
+                    </div>
+                    <div>
+                      <div className="text-gray-600">متوسط السرعة</div>
+                      <div className="font-semibold text-lg">{region.avgSpeed}</div>
+                    </div>
+                    <div>
+                      <div className="text-gray-600">الشركات</div>
+                      <div className="font-semibold text-lg">{region.companies}</div>
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
             ))}
           </div>
-        </div>
-      </section>
+        </motion.div>
 
-      {/* Newsletter */}
-      <section className="w-full py-12 md:py-24 lg:py-32">
-        <div className="container px-4 md:px-6">
-          <div className="flex flex-col items-center justify-center space-y-4 text-center">
-            <div className="space-y-2">
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">اشترك في نشرتنا الإخبارية</h2>
-              <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                احصل على آخر الأخبار والمقالات في مجال الاتصالات وتكنولوجيا المعلومات
-              </p>
-            </div>
-            <div className="w-full max-w-sm space-y-2">
-              <form className="flex flex-col gap-2 min-[400px]:flex-row">
-                <Input type="email" placeholder="بريدك الإلكتروني" required />
-                <Button type="submit">اشترك</Button>
-              </form>
-              <p className="text-xs text-muted-foreground">
-                لن نشارك بريدك الإلكتروني مع أي جهة أخرى. اقرأ{" "}
-                <Link href="#" className="underline underline-offset-2">
-                  سياسة الخصوصية
-                </Link>
-              </p>
-            </div>
+        {/* Major Companies */}
+        <motion.div
+          className="mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+        >
+          <h2 className="text-3xl font-bold text-center mb-8 text-slate-800">مشغلي الاتصالات العالميين الرائدين</h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {majorCompanies.map((company, index) => (
+              <Card
+                key={index}
+                className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group"
+              >
+                <CardHeader
+                  className={`bg-gradient-to-r ${company.color} text-white p-6 group-hover:scale-105 transition-transform`}
+                >
+                  <div className="flex items-center gap-3">
+                    {company.icon}
+                    <div>
+                      <CardTitle className="text-lg">{company.name}</CardTitle>
+                      <p className="text-white/90 text-sm">{company.country}</p>
+                    </div>
+                  </div>
+                </CardHeader>
+                <CardContent className="p-6">
+                  <div className="space-y-3">
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">المشتركين</span>
+                      <span className="font-semibold">{company.subscribers}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">الإيرادات</span>
+                      <span className="font-semibold">{company.revenue}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">التقنية</span>
+                      <Badge variant="outline">{company.technology}</Badge>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
           </div>
-        </div>
-      </section>
+        </motion.div>
 
-      {/* Footer */}
-      <footer className="w-full border-t bg-background">
-        <div className="container flex flex-col gap-6 py-8 md:py-12">
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-4">
-            <div className="space-y-3">
-              <h3 className="text-lg font-medium">عن المدونة</h3>
-              <p className="text-sm text-muted-foreground">
-                مدونة متخصصة في مجال الاتصالات وتكنولوجيا المعلومات تقدم أحدث الأخبار والتحليلات
+        {/* Technologies Section */}
+        <motion.div
+          className="mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.8 }}
+        >
+          <h2 className="text-3xl font-bold text-center mb-8 text-slate-800">التقنيات العالمية</h2>
+          <div className="space-y-6">
+            {technologies.map((tech) => (
+              <Card key={tech.id} className="border-0 shadow-lg hover:shadow-xl transition-all duration-300">
+                <CardHeader className="cursor-pointer" onClick={() => toggleCard(tech.id)}>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-4">
+                      <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white">
+                        <Activity className="h-8 w-8" />
+                      </div>
+                      <div>
+                        <CardTitle className="text-xl">{tech.name}</CardTitle>
+                        <p className="text-gray-600 mt-1">{tech.description}</p>
+                        <Badge className="mt-2">الاعتماد العالمي: {tech.adoption}</Badge>
+                      </div>
+                    </div>
+                    {expandedCard === tech.id ? (
+                      <ChevronUp className="h-6 w-6 text-gray-400" />
+                    ) : (
+                      <ChevronDown className="h-6 w-6 text-gray-400" />
+                    )}
+                  </div>
+                </CardHeader>
+                {expandedCard === tech.id && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <CardContent>
+                      <div className="grid md:grid-cols-2 gap-8">
+                        <div>
+                          <h4 className="font-semibold mb-3">الميزات الرئيسية</h4>
+                          <div className="space-y-2">
+                            {tech.features.map((feature, idx) => (
+                              <div key={idx} className="flex items-start gap-2">
+                                <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
+                                <span className="text-sm">{feature}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                        <div>
+                          <h4 className="font-semibold mb-3">الاعتماد الإقليمي</h4>
+                          <div className="space-y-3">
+                            {Object.entries(tech.regions).map(([region, percentage]) => (
+                              <div key={region} className="flex justify-between items-center">
+                                <span className="text-sm">{region}</span>
+                                <div className="flex items-center gap-2">
+                                  <div className="w-20 h-2 bg-gray-200 rounded-full">
+                                    <div
+                                      className="h-2 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full"
+                                      style={{ width: percentage }}
+                                    ></div>
+                                  </div>
+                                  <span className="text-sm font-medium">{percentage}</span>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </motion.div>
+                )}
+              </Card>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Future Innovations */}
+        <motion.div
+          className="mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 1.0 }}
+        >
+          <h2 className="text-3xl font-bold text-center mb-8 text-slate-800">الابتكارات المستقبلية</h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {innovations.map((innovation, index) => (
+              <Card
+                key={index}
+                className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
+              >
+                <div className={`${innovation.color} p-6 text-white`}>
+                  <h3 className="text-lg font-bold mb-2">{innovation.title}</h3>
+                  <p className="text-white/90 text-sm mb-4">{innovation.description}</p>
+                  <div className="flex justify-between items-center">
+                    <Badge variant="secondary" className="bg-white/20 text-white border-white/30">
+                      {innovation.timeline}
+                    </Badge>
+                    <span className="text-xs font-medium">{innovation.impact}</span>
+                  </div>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Call to Action */}
+        <motion.div
+          className="text-center"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 1.2 }}
+        >
+          <Card className="border-0 shadow-xl bg-gradient-to-r from-blue-50 via-purple-50 to-pink-50">
+            <CardContent className="p-12">
+              <h3 className="text-3xl font-bold mb-4 text-slate-800">اتصل بالشبكة العالمية</h3>
+              <p className="text-gray-600 mb-8 max-w-3xl mx-auto text-lg">
+                استكشف الفرص في سوق الاتصالات العالمية وابق في المقدمة مع الابتكارات التكنولوجية التي تشكل عالمنا
+                المتصل.
               </p>
-            </div>
-            <div className="space-y-3">
-              <h3 className="text-lg font-medium">روابط سريعة</h3>
-              <ul className="space-y-2 text-sm">
-                <li>
-                  <Link href="#" className="text-muted-foreground hover:text-foreground">
-                    الرئيسية
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="text-muted-foreground hover:text-foreground">
-                    المقالات
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="text-muted-foreground hover:text-foreground">
-                    التقنيات
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="text-muted-foreground hover:text-foreground">
-                    الأخبار
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div className="space-y-3">
-              <h3 className="text-lg font-medium">الفئات</h3>
-              <ul className="space-y-2 text-sm">
-                <li>
-                  <Link href="#" className="text-muted-foreground hover:text-foreground">
-                    الجيل الخامس
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="text-muted-foreground hover:text-foreground">
-                    الذكاء الاصطناعي
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="text-muted-foreground hover:text-foreground">
-                    إنترنت الأشياء
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="text-muted-foreground hover:text-foreground">
-                    الأمن السيبراني
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div className="space-y-3">
-              <h3 className="text-lg font-medium">تواصل معنا</h3>
-              <ul className="space-y-2 text-sm">
-                <li>
-                  <Link href="#" className="text-muted-foreground hover:text-foreground">
-                    اتصل بنا
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="text-muted-foreground hover:text-foreground">
-                    من نحن
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="text-muted-foreground hover:text-foreground">
-                    سياسة الخصوصية
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="text-muted-foreground hover:text-foreground">
-                    الشروط والأحكام
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <p className="text-sm text-muted-foreground">© 2025 مدونة الاتصالات العربية. جميع الحقوق محفوظة.</p>
-            <div className="flex gap-4">
-              <Link href="#" className="text-muted-foreground hover:text-foreground">
-                <span className="sr-only">تويتر</span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="h-5 w-5"
+              <div className="flex flex-wrap justify-center gap-4">
+                <Button
+                  size="lg"
+                  className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700"
                 >
-                  <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path>
-                </svg>
-              </Link>
-              <Link href="#" className="text-muted-foreground hover:text-foreground">
-                <span className="sr-only">فيسبوك</span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="h-5 w-5"
-                >
-                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-                </svg>
-              </Link>
-              <Link href="#" className="text-muted-foreground hover:text-foreground">
-                <span className="sr-only">انستغرام</span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="h-5 w-5"
-                >
-                  <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
-                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                  <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
-                </svg>
-              </Link>
-              <Link href="#" className="text-muted-foreground hover:text-foreground">
-                <span className="sr-only">لينكد إن</span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="h-5 w-5"
-                >
-                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                  <rect width="4" height="12" x="2" y="9"></rect>
-                  <circle cx="4" cy="4" r="2"></circle>
-                </svg>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </footer>
+                  تحليل السوق
+                </Button>
+                <Button size="lg" variant="outline" className="border-blue-300 text-blue-600 hover:bg-blue-50">
+                  اتجاهات التكنولوجيا
+                </Button>
+                <Button size="lg" variant="outline" className="border-purple-300 text-purple-600 hover:bg-purple-50">
+                  فرص الاستثمار
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </motion.div>
+      </div>
     </div>
   )
 }
