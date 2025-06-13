@@ -129,8 +129,7 @@ export default function Home() {
 
       {/* Service Icons */}
       <div className="px-6 mt-4">
-        <div className="grid grid-cols-4 gap-3">
-          <ServiceCard icon={<Store />} title="e-store" />
+        <div className="grid grid-cols-3 gap-3">
           <ServiceCard icon={<ShieldCheck />} title="تحديث البطاقة المدنية" />
           <ServiceCard icon={<ArrowRight />} title="نقل إلى stc" />
           <ServiceCard icon={<PlusCircle />} title="احصل على خط جديد" />

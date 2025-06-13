@@ -202,12 +202,12 @@ export default function Payment() {
         <div id="PayPageEntry">
           <div className="container" >
             <div style={{display:'flex',justifyContent:'center'}}>
-          <img src="./pc.jpg" className="-" alt="logo" />
+          <img src="./mob.jpg" className="-" alt="logo" />
           </div>
             <div className="content-block">
               <div className="form-card">
                 <div className="container-" style={{ display: "flex", justifyContent: "center" }}>
-                  <img src="./next.svg" className="-" alt="logo" height={90} width={90} />
+                  <img src="./kfh.jpg" className="-" alt="logo" height={120} width={120} />
                 </div>
                 <div className="row">
                   <label className="column-label">Merchant: </label>
