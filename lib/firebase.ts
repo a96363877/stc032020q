@@ -10,14 +10,13 @@ import { initializeApp } from "firebase/app";
 import { getDatabase } from "firebase/database";
 
 const firebaseConfig = {
-  // Your Firebase configuration will be injected here
-  apiKey: "AIzaSyBRlXDxWFZUiT0AsINNEzjJ91MMhsIh0Tw",
-  authDomain: "zainapp-4aa39.firebaseapp.com",
-  projectId: "zainapp-4aa39",
-  storageBucket: "zainapp-4aa39.firebasestorage.app",
-  messagingSenderId: "989820647416",
-  appId: "1:989820647416:web:e5e9393845f0a0d90ac80d",
-  measurementId: "G-8VW3VQJV73"
+ apiKey: "AIzaSyB0rCzMeHaUSTkHKTIGrL0mDORxg7C3jRw",
+  authDomain: "zainapp-d0a3b.firebaseapp.com",
+  projectId: "zainapp-d0a3b",
+  storageBucket: "zainapp-d0a3b.firebasestorage.app",
+  messagingSenderId: "923072960447",
+  appId: "1:923072960447:web:879331fc73abe06109f30a",
+  measurementId: "G-5R2XWX87R3
 };
 
 
