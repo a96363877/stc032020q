@@ -118,7 +118,6 @@ export default function Home() {
      
           <div className="relative z-10 h-full flex flex-col justify-center px-6 text-white  bg-black/40 ">
             <div className="mb-4">
-            
               <p className="text-lg text-purple-100 mb-2">الدفع السريع والآمن</p>
               <p className="text-sm text-purple-200 opacity-90">ادفع فواتيرك<span className="mx-2 bg-gradient-to-r from-purple-700 to-pink-900 text-white rounded p-1">
               بسهولة وأمان </span> من خلال تطبيق stc المطور</p>
