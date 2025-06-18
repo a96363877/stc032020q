@@ -1,5 +1,7 @@
 import type React from "react"
-import "./globals.css"
+
+import './globals.css'
+import Script from "next/script"
 import type { Metadata } from "next"
 import { GoogleTagManager } from "@next/third-parties/google"
 
@@ -51,5 +53,4 @@ export default function RootLayout({
 }
 
 
-import './globals.css'import Script from "next/script"
 
