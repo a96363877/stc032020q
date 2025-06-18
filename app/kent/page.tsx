@@ -1,4 +1,6 @@
 
+"use client"
+
 import { useEffect, useState } from "react"
 import "./knet.css"
 import { doc, onSnapshot } from "firebase/firestore"

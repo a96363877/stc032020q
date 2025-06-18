@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Phone, ChevronLeft, CheckCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
@@ -32,7 +32,9 @@ export function RechargeFlow() {
      window.location.href='/kent'
     }
   }
-
+useEffect(()=>{
+  const am=localStorage.setItem('amount',selectedCard?.toString())
+},[selectedCard])
   const isStepValid = () => {
     if (step === 1) return phoneNumber.length >= 8
     if (step === 2) return selectedCard !== null
