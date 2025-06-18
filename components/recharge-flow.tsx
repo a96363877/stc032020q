@@ -85,7 +85,7 @@ export function RechargeFlow() {
                 </div>
                 <input
                   type="tel"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full pr-10 p-4 text-center font-bold tracking-wide"
+                  className="bg-gray-50 border border-2 border-purple-600 text-gray-900 text-lg rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full pr-10 p-4 text-center font-bold tracking-wide"
                   placeholder="5XXXXXXX"
                   required
                   dir="ltr"

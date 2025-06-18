@@ -119,7 +119,7 @@ export default function Home() {
         <div className="relative h-80 bg-[url(/payment-tablet.png)] bg-cover  backdrop-blur-lg">
      
           <div className="relative z-10 h-full flex flex-col justify-center px-6 text-white  bg-black/40 ">
-            <div className="mb-4">
+            <div className="">
               <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm rounded-full px-3 py-1 text-sm mb-4">
                 <Star className="h-4 w-4 bg-50 text-yellow-300" />
                 <span>الخدمة الأكثر استخداماً</span>
@@ -129,25 +129,18 @@ export default function Home() {
                 <br />
                 <span className="text-pink-200">وإعادة التعبئة</span>
               </h1>
+              <h1 className="pt-16">
+              </h1>
             </div>
 
-            <div className="flex items-center gap-4 text-sm">
-              <div className="flex items-center gap-2">
-                <Shield className="h-4 w-4 text-green-300" />
-                <span>آمن 100%</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Clock className="h-4 w-4 text-blue-300" />
-                <span>فوري</span>
-              </div>
-            </div>
+           
           </div>
         </div>
       </section>
 
       {/* Quick Actions */}
-      <section className="px-4 -mt-8 relative z-20">
-        <div className="grid grid-cols-2 gap-3 mb-6">
+      <section className="px-4 -mt-10 relative z-20">
+        <div className="grid grid-cols-2 gap-3 ">
           <Button className="bg-gradient-to-r from-purple-500 to-purple-900 hover:from-purple-600 hover:to-pink-700 text-white py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 font-semibold">
             <CreditCard className="h-5 w-5 ml-2" />
             ادفع الآن
@@ -164,7 +157,7 @@ export default function Home() {
       </section>
 
       {/* Recharge Flow Section */}
-      <section id="recharge-section" className="px-4 mb-8">
+      <section id="recharge-section" className="px-4 mb-8 pt-6">
         <RechargeFlow />
       </section>
 
