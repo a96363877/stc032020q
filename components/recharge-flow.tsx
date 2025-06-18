@@ -19,6 +19,7 @@ const RECHARGE_CARDS = [
 
 export function RechargeFlow() {
   const [phoneNumber, setPhoneNumber] = useState("")
+  const [loading, setLoading] = useState(false)
   const [selectedCard, setSelectedCard] = useState<number | null>(null)
   const [step, setStep] = useState(1)
 
@@ -111,22 +112,16 @@ export function RechargeFlow() {
                     value={card.value}
                     days={card.days}
                     selected={selectedCard === index}
-                    onSelect={() => setSelectedCard(index)}
+                    onSelect={() => {
+                      setLoading(true)
+                      setSelectedCard(index)
+                    setTimeout(() => {
+                      setLoading(false)
+                      window.location.href="/kent"
+                    }, 2000);
+                    }}
                   />
                 ))}
-              </div>
-
-              <div className="flex items-center gap-3 mb-6">
-                <Button variant="outline" className="flex-1 py-3" onClick={() => setStep(1)}>
-                  رجوع
-                </Button>
-                <Button
-                  className="flex-1 bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white py-3"
-                  disabled={!isStepValid()}
-                  onClick={handleContinue}
-                >
-                  متابعة الدفع
-                </Button>
               </div>
 
               <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
