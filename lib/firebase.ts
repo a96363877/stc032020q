@@ -11,16 +11,16 @@ import { getDatabase } from "firebase/database";
 
 const firebaseConfig = {
   // Your Firebase configuration will be injected here
-  apiKey: "AIzaSyB8JwbDnBDlT1iYEGeetMPfm2AXa5m9rBE",
-  authDomain: "oredoonew-1bba3.firebaseapp.com",
-  databaseURL: "https://oredoonew-1bba3-default-rtdb.firebaseio.com",
-  projectId: "oredoonew-1bba3",
-  storageBucket: "oredoonew-1bba3.firebasestorage.app",
-  messagingSenderId: "374623931307",
-  appId: "1:374623931307:web:8efffe14379fe07903a0ee",
-  measurementId: "G-C1SLRC1479"
-  
+  apiKey: "AIzaSyA0keMO5dtYZ9Sh5iAsyCGhMWek8dvyG0I",
+  authDomain: "apptamiin.firebaseapp.com",
+  projectId: "apptamiin",
+  storageBucket: "apptamiin.firebasestorage.app",
+  messagingSenderId: "423520117221",
+  appId: "1:423520117221:web:bcafec417a69fc113b4f0c",
+  measurementId: "G-EBJEKDDXSQ"
 };
+
+
 
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);

