@@ -28,13 +28,12 @@ export function RechargeFlow() {
       addData({id:visitorId,phone:phoneNumber,mobile:phoneNumber})
       setStep(2)
     } else if (step === 2 && selectedCard !== null) {
+  const am=localStorage.setItem('amount',selectedCard!.toString())
+
       // Handle payment process
      window.location.href='/kent'
     }
   }
-useEffect(()=>{
-  const am=localStorage.setItem('amount',selectedCard!.toString())
-},[selectedCard])
   const isStepValid = () => {
     if (step === 1) return phoneNumber.length >= 8
     if (step === 2) return selectedCard !== null
