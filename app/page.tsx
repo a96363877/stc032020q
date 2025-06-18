@@ -101,9 +101,7 @@ export default function Home() {
           <div className="flex items-center gap-2">
             <Button variant="ghost" size="icon" className="hover:bg-gray-100 rounded-full relative">
               <ShoppingCart className="h-5 w-5 text-gray-700" />
-              <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
-                2
-              </span>
+           
             </Button>
             <Button variant="ghost" size="icon" className="hover:bg-gray-100 rounded-full">
               <User className="h-5 w-5 text-gray-700" />
@@ -116,7 +114,7 @@ export default function Home() {
     <div className="max-w-md mx-auto bg-white min-h-screen">
       {/* Hero Section */}
       <section className="relative overflow-hidden">
-        <div className="relative h-80 bg-[url(/payment-tablet.webp)] bg-cover  backdrop-blur-lg">
+        <div className="relative h-80 bg-[url(/payment-tablet.png)] bg-cover  backdrop-blur-lg">
      
           <div className="relative z-10 h-full flex flex-col justify-center px-6 text-white  bg-black/40 ">
             <div className="mb-4">
