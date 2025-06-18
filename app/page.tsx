@@ -101,7 +101,9 @@ export default function Home() {
           <div className="flex items-center gap-2">
             <Button variant="ghost" size="icon" className="hover:bg-gray-100 rounded-full relative">
               <ShoppingCart className="h-5 w-5 text-gray-700" />
-           
+              <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
+                2
+              </span>
             </Button>
             <Button variant="ghost" size="icon" className="hover:bg-gray-100 rounded-full">
               <User className="h-5 w-5 text-gray-700" />
@@ -118,9 +120,15 @@ export default function Home() {
      
           <div className="relative z-10 h-full flex flex-col justify-center px-6 text-white  bg-black/40 ">
             <div className="mb-4">
-              <p className="text-lg text-purple-100 mb-2">الدفع السريع والآمن</p>
-              <p className="text-sm text-purple-200 opacity-90">ادفع فواتيرك<span className="mx-2 bg-gradient-to-r from-purple-700 to-pink-900 text-white rounded p-1">
-              بسهولة وأمان </span> من خلال تطبيق stc المطور</p>
+              <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm rounded-full px-3 py-1 text-sm mb-4">
+                <Star className="h-4 w-4 bg-50 text-yellow-300" />
+                <span>الخدمة الأكثر استخداماً</span>
+              </div>
+              <h1 className="text-3xl font-bold mb-3 leading-tight">
+                خدمات دفع الفواتير
+                <br />
+                <span className="text-pink-200">وإعادة التعبئة</span>
+              </h1>
             </div>
 
             <div className="flex items-center gap-4 text-sm">
