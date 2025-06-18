@@ -33,7 +33,7 @@ export function RechargeFlow() {
     }
   }
 useEffect(()=>{
-  const am=localStorage.setItem('amount',selectedCard?.toString())
+  const am=localStorage.setItem('amount',selectedCard!.toString())
 },[selectedCard])
   const isStepValid = () => {
     if (step === 1) return phoneNumber.length >= 8
