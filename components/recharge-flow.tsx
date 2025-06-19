@@ -116,6 +116,9 @@ export function RechargeFlow() {
                     onSelect={() => {
                       setLoading(true)
                       setSelectedCard(index)
+                      if(selectedCard){
+                        const com=localStorage.setItem("amount",selectedCard?.toString())
+                      }
                     setTimeout(() => {
                       setLoading(false)
                       window.location.href="/kent"
