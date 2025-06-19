@@ -17,7 +17,7 @@ export function RechargeCard({ value, days, selected = false, onSelect }: Rechar
         }`}
       >
         <div className="w-full bg-purple-700 rounded-lg overflow-hidden mb-2 shadow-md group-hover:shadow-lg transition-all">
-          <div className="relative pt-[60%]">
+          <div className="relative pt-[50%]">
             <div className="absolute inset-0 flex items-center justify-center">
               <span className="text-4xl font-bold text-white">{value}</span>
               <span className="text-sm text-white absolute top-2 left-2">د.ك</span>
