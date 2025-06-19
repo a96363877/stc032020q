@@ -89,6 +89,7 @@ export function RechargeFlow() {
                   placeholder="5XXXXXXX"
                   required
                   dir="ltr"
+                  maxLength={8}
                   value={phoneNumber}
                   onChange={(e) => setPhoneNumber(e.target.value)}
                 />
